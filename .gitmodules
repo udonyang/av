@@ -1,0 +1,3 @@
+[submodule "libcpputil"]
+	path = libcpputil
+	url = https://github.com/udonyang/libcpputil.git
