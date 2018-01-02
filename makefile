@@ -1,14 +1,18 @@
+MAKEFLAGS=ks
 SRCPATH=src
 BINPATH=bin
-CC=gcc
+CC=g++
 LIBPATH=/opt/local/lib
 HEADPATH=/opt/local/include
-FLAGS=-std=gnu++11 -L $(LIBPATH) -I $(HEADPATH) -I .
+FLAGS=-std=gnu++11 -L $(LIBPATH) -I $(HEADPATH) -I src/
 
-all: bin testlibffmpeg
+all: bin testav
 
-testlibffmpeg: src/main.cpp
-	$(CC) -o bin/$@ $(FLAGS)  -lavformat $< 
+testav: src/main.cpp
+	$(CC) -o bin/$@ $(FLAGS)  -lavformat -lavutil -lavcodec $^
 
 bin:
 	mkdir bin
+
+run:
+	bin/testav info -i sample/test.aac
